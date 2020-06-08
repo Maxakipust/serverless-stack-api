@@ -1,4 +1,4 @@
-service: notes-app-api
+service: notes-app-2-api
 
 package:
   individually: true
@@ -8,14 +8,18 @@ plugins:
   - serverless-offline
   - serverless-dotenv-plugin
 
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  tableName: ${self:custom.stage}-notes
+
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: prod
+  stage: dev
   region: us-east-1
 
   environment:
-    tableName: notes
+    tableName: ${self:custom.tableName}
     stripeSecretKey: ${env:STRIPE_SECRET_KEY}
 
   iamRoleStatements:
@@ -28,7 +32,8 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-east-1:*:*"
+      Resource:
+        - "Fn::GetAtt": [ NotesTable, Arn ]
 
 functions:
   create:
@@ -82,3 +87,7 @@ functions:
 
 resources:
   - ${file(resources/api-gateway-errors.yml)}
+  - ${file(resources/dynamodb-table.yml)}
+  - ${file(resources/s3-bucket.yml)}
+  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito-identity-pool.yml)}
