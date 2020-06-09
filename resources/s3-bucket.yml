@@ -51,28 +51,28 @@ Resources:
                     "/*"
                   ]
                 ]
-    DevS3BucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        Bucket:
-          Ref: DevBucket
-        PolicyDocument:
-          Statement:
-            - Sid: PublicReadGetObject
-              Effect: Allow
-              Principal: '*'
-              Action:
-                - s3:GetObject
-              Resource:
-                Fn::Join: [
-                  "", [
-                    "arn:aws:s3:::",
-                    {
-                      "Ref": "DevBucket"
-                    },
-                    "/*"
-                  ]
+  DevS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: DevBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: '*'
+            Action:
+              - s3:GetObject
+            Resource:
+              Fn::Join: [
+                "", [
+                  "arn:aws:s3:::",
+                  {
+                    "Ref": "DevBucket"
+                  },
+                  "/*"
                 ]
+              ]
 
 Outputs:
   AttachmentsBucketName:
