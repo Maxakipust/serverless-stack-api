@@ -4,5 +4,5 @@ export function calculateCost(storage) {
         : storage <= 100
             ? 2
             : 1;
-    return rate * storage * 100;
+    return rate * storage;
 }
