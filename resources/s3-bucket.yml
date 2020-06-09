@@ -16,8 +16,48 @@ Resources:
               - DELETE
               - HEAD
             MaxAge: 3000
+ProdBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      CorsConfiguration:
+        CorsRules:
+          -
+            AllowedOrigins:
+              - '*'
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            MaxAge: 3000
+DevBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      CorsConfiguration:
+        CorsRules:
+          -
+            AllowedOrigins:
+              - '*'
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            MaxAge: 3000
 
 Outputs:
   AttachmentsBucketName:
     Value:
       Ref: AttachmentsBucket
+  DevBucketName:
+    Value:
+      Ref: ProdBucket
+  ProdBucketName:
+    Value:
+      Ref: DevBucket

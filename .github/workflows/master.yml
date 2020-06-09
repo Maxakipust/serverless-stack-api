@@ -1,7 +1,8 @@
 on:
+  pull_request:
+    branches: [master]
   push:
-    branches:
-      - master
+    branches: [master]
 
 name: Deploy Master as Prod
 jobs:
