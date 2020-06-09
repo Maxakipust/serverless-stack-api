@@ -1,4 +1,4 @@
-service: notes-app-2-api
+service: notes-app-api
 
 package:
   individually: true
