@@ -5,7 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "test": "serverless-bundle test",
-    "deploy": "serverless deploy",
+    "deployProd": "serverless deploy --stage prod -v",
+    "deployDev": "serverless deploy --stage dev -v"
   },
   "author": "",
   "license": "MIT",
