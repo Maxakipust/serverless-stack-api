@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "serverless": "^1.72.0",
+    "serverless-domain-manager": "^4.1.1",
     "stripe": "^8.60.0",
     "uuid": "^7.0.3"
   }

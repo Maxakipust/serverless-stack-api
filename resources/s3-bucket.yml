@@ -16,40 +16,8 @@ Resources:
               - DELETE
               - HEAD
             MaxAge: 3000
-  FrontEndBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        AccessControl: PublicRead
-        WebsiteConfiguration:
-          IndexDocument: index.html
-
-  FrontEndS3BucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        Bucket:
-          Ref: FrontEndBucket
-        PolicyDocument:
-          Statement:
-            - Sid: PublicReadGetObject
-              Effect: Allow
-              Principal: '*'
-              Action:
-                - s3:GetObject
-              Resource:
-                Fn::Join: [
-                  "", [
-                    "arn:aws:s3:::",
-                    {
-                      "Ref": "FrontEndBucket"
-                    },
-                    "/*"
-                  ]
-                ]
 
 Outputs:
   AttachmentsBucketName:
     Value:
       Ref: AttachmentsBucket
-  DevBucketName:
-    Value:
-      Ref: FrontEndBucket

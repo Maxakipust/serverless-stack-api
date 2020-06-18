@@ -7,16 +7,20 @@ plugins:
   - serverless-bundle
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-domain-manager
 
 custom:
   stage: ${opt:stage, self:provider.stage}
   tableName: ${self:custom.stage}-notes
+  customDomain:
+    domainName: ${self:custom.stage}-api.maxkipust.com
+    basePath: ''
+    stage: ${self:custom.stage}
+    createRoute53Record: true
 
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: dev
-  region: us-east-1
 
   environment:
     tableName: ${self:custom.tableName}
